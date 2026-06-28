@@ -19,7 +19,7 @@ class Config:
     PORT = int(os.environ.get('FLASK_PORT', 5000))
     
     # Application settings
-    RESUME_PATH = os.path.join(os.getcwd(), 'assets', 'Raviteja_B_Resume.pdf')
+    RESUME_PATH = os.path.join(os.getcwd(), 'assets', 'Raviteja_B_AI_GenAI_Resume.pdf')
     
 class DevelopmentConfig(Config):
     """Development configuration"""

@@ -36,7 +36,7 @@ PORTFOLIO/
 │       ├── ai_clients.py        # AI API management
 │       └── resume_context.py    # Resume data & fallbacks
 ├── assets/                      # Static assets
-│   └── Raviteja_B_Resume.pdf   # Resume file
+│   └── Raviteja_B_AI_GenAI_Resume.pdf   # Resume file
 ├── venv/                        # Virtual environment
 ├── .env                         # Environment variables
 ├── requirements.txt             # Python dependencies
@@ -88,9 +88,19 @@ The repository includes a static entry point at [index.html](index.html) and a P
    FLASK_DEBUG=True
    FLASK_HOST=0.0.0.0
    FLASK_PORT=5000
+   SECRET_KEY=your_secure_secret_key
    ```
 
-5. **Run the Application**
+   Notes:
+   - `GEMINI_API_KEY` and `GROQ_API_KEY` are only used by the Flask backend for AI chat.
+   - The GitHub Pages static deployment does not use these keys, because Pages cannot run Python server code.
+   - If you want the AI assistant live, deploy the Flask app to a dynamic host (Railway, Render, Heroku, etc.) and set the same keys there.
+
+5. **Update your resume file**
+   - Replace `assets/Raviteja_B_AI_GenAI_Resume.pdf` with your new resume using the same filename.
+   - If you want another path or filename, update the download link in `index.html` and `app/api/main_routes.py`.
+
+6. **Run the Application**
    ```bash
    python run.py
    ```

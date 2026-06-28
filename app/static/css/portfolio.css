@@ -4,36 +4,37 @@
     box-sizing: border-box;
 }
 
-        body {
-            font-family: 'JetBrains Mono', 'Consolas', 'Monaco', monospace;
-            background: #f8fafc;
-            color: #2c3e50;
-            overflow: hidden;
-            height: 100vh;
-            line-height: 1.6;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            margin: 0;
-            padding: 0;
-            /* Prevent any body scrolling */
-            overscroll-behavior: none;
-            -webkit-overflow-scrolling: touch;
-        }
+html {
+    scroll-behavior: smooth;
+    min-height: 100%;
+}
 
-        /* Mobile browser UI spacing */
-        @media (max-width: 480px) {
-            body {
-                padding-top: env(safe-area-inset-top, 0px);
-                height: calc(100vh - env(safe-area-inset-top, 0px));
-                /* Prevent any body scrolling on mobile */
-                overflow: hidden;
-                position: fixed;
-                width: 100%;
-            }
-        }
+body {
+    font-family: 'JetBrains Mono', 'Consolas', 'Monaco', monospace;
+    background: #f8fafc;
+    color: #2c3e50;
+    overflow-x: hidden;
+    overflow-y: auto;
+    min-height: 100vh;
+    line-height: 1.6;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Mobile browser UI spacing */
+@media (max-width: 480px) {
+    body {
+        padding-top: env(safe-area-inset-top, 0px);
+        min-height: calc(100vh - env(safe-area-inset-top, 0px));
+        overflow-x: hidden;
+        overflow-y: auto;
+        position: relative;
+        width: 100%;
+    }
+}
 
         /* Removed gradientShift animation - no longer needed */
 
@@ -58,9 +59,10 @@
         }
 
         .terminal-container {
-            width: calc(100vw - 20px);
-            height: calc(100vh - 20px);
-            margin: 10px;
+            width: min(1400px, calc(100% - 32px));
+            min-height: 100vh;
+            margin: 20px auto;
+            padding: 20px;
             background: linear-gradient(135deg, 
                 rgba(255, 255, 255, 0.98) 0%, 
                 rgba(248, 249, 250, 0.95) 50%, 
@@ -77,10 +79,7 @@
             position: relative;
             z-index: 2;
             border-radius: 20px;
-            /* Ensure container fills available space and prevents body scroll */
-            max-height: calc(100vh - 20px);
             animation: containerGlow 8s ease-in-out infinite;
-            /* Position content at top of container */
             justify-content: flex-start;
         }
 
@@ -173,16 +172,12 @@
 
         .terminal-content {
             flex: 1;
-            padding: 25px 30px;
-            overflow: hidden;
+            padding: 28px 28px 32px;
+            overflow: auto;
             display: flex;
             flex-direction: column;
             position: relative;
-            /* Remove scrolling */
-            overflow-y: hidden;
-            /* Match outer container's corner radius with extra curve */
             border-radius: 0 0 20px 20px;
-            /* Stable AI-themed gradient background - no animation to prevent text overlap */
             background: linear-gradient(135deg, 
                 #f8fafc 0%, 
                 #f1f5f9 25%, 
@@ -190,9 +185,6 @@
                 #cbd5e1 75%, 
                 #f8fafc 100%
             );
-            /* Remove top margin to touch terminal-header */
-            margin-top: 0;
-            /* Extend content to touch header */
             margin-top: -1px;
         }
 
@@ -582,9 +574,8 @@
 /* Resume Section */
 .resume-section {
     flex-shrink: 0;
-    align-self: stretch;
     display: flex;
-    align-items: stretch;
+    align-items: center;
     margin-left: auto;
 }
 
@@ -597,24 +588,24 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-    padding: 20px 0;
-    border-radius: 0 10px 10px 0;
+    padding: 16px 18px;
+    border-radius: 14px;
     font-weight: 600;
     font-size: 14px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(185, 28, 28, 0.4);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 8px 20px rgba(185, 28, 28, 0.25);
     border: none;
     cursor: pointer;
-    width: 70px;
-    margin-right: -30px;
-    margin-top: -25px;
-    margin-bottom: -25px;
+    min-width: 140px;
+    margin: 0;
     text-align: center;
 }
 
 .resume-btn:hover {
     color: white;
     text-decoration: none;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(185, 28, 28, 0.35);
 }
 
 .resume-btn i {
@@ -696,6 +687,113 @@
 .floating-chat-btn:focus {
     outline: 2px solid #ffffff;
     outline-offset: 2px;
+}
+
+/* Responsive layout fixes */
+@media (max-width: 1024px) {
+    .terminal-container {
+        width: calc(100% - 24px);
+        margin: 16px auto;
+        padding: 16px;
+    }
+
+    .terminal-header {
+        padding: 16px 18px;
+        border-radius: 16px 16px 0 0;
+    }
+
+    .terminal-content {
+        padding: 22px 20px 24px;
+    }
+}
+
+@media (max-width: 860px) {
+    .contact-content {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+    }
+
+    .resume-section {
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .resume-btn {
+        width: 100%;
+        min-width: auto;
+        border-radius: 14px;
+    }
+
+    .terminal-header {
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 720px) {
+    .terminal-container {
+        padding: 12px;
+        border-radius: 14px;
+    }
+
+    .terminal-header {
+        flex-direction: column;
+        gap: 10px;
+        height: auto;
+    }
+
+    .terminal-title {
+        font-size: 14px;
+    }
+
+    .terminal-content {
+        padding: 18px 16px 20px;
+    }
+
+    .contact-title {
+        font-size: 16px;
+    }
+
+    .contact-item, .contact-item-inline {
+        font-size: 14px;
+    }
+
+    .contact-title-line {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .panel-content {
+        padding: 18px 18px;
+    }
+}
+
+@media (max-width: 540px) {
+    .job-title,
+    .section-header,
+    .project-title,
+    .skill-category,
+    .education-title {
+        font-size: 16px;
+    }
+
+    .content-text,
+    .bullet-point,
+    .skill-list,
+    .certificate-list,
+    .education-details,
+    .education-gpa {
+        font-size: 14px;
+    }
+
+    .floating-chat-btn {
+        bottom: 18px;
+        right: 18px;
+        width: 60px;
+        height: 60px;
+    }
 }
 
         @keyframes chatBtnGlow {

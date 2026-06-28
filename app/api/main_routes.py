@@ -24,37 +24,22 @@ def health_check():
 def download_resume():
     """Download resume file"""
     try:
-        # Get the current working directory and construct the path
-        current_dir = os.getcwd()
-        
-        # Try the actual filename with spaces first
-        resume_path = os.path.join(current_dir, 'assets', 'Raviteja_B_Resume.pdf')
-        
+        base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
+        resume_path = os.path.join(base_dir, 'assets', 'Raviteja_B_AI_GenAI_Resume.pdf')
+
         print(f"Looking for resume at: {resume_path}")
         print(f"File exists: {os.path.exists(resume_path)}")
-        
+
         if os.path.exists(resume_path):
             return send_file(
                 resume_path,
                 as_attachment=True,
-                download_name='Raviteja_B_Resume.pdf',
+                download_name='Raviteja_B_AI_GenAI_Resume.pdf',
                 mimetype='application/pdf'
             )
-        else:
-            # Try without spaces as fallback
-            alt_path = os.path.join(current_dir, 'assets', 'Raviteja_B_Resume.pdf')
-            print(f"Trying alternative path: {alt_path}")
-            
-            if os.path.exists(alt_path):
-                return send_file(
-                    alt_path,
-                    as_attachment=True,
-                    download_name='Raviteja_B_Resume.pdf',
-                    mimetype='application/pdf'
-                )
-            else:
-                return jsonify({'error': f'Resume file not found at {resume_path} or {alt_path}'}), 404
-                
+
+        return jsonify({'error': f'Resume file not found at {resume_path}'}), 404
+
     except Exception as e:
         print(f"Resume download error: {e}")
         return jsonify({'error': f'Failed to download resume: {str(e)}'}), 500 
