@@ -249,10 +249,32 @@ class PortfolioChatbot {
                     
                     this.displayMessage({
                         type: 'ai',
-                        content: 'Sorry, I encountered an error. Please try asking your question again.'
+                        content: this.generateFallbackResponse(message)
                     });
                 }
             }
+
+    generateFallbackResponse(message) {
+        const text = message.toLowerCase();
+
+        if (text.includes('project') || text.includes('work')) {
+            return 'Raviteja has worked on AI-powered analytics, autonomous market research systems, RAG document processors, and voice-driven desktop assistants.';
+        }
+
+        if (text.includes('skill') || text.includes('tech') || text.includes('stack')) {
+            return 'His core strengths include Python, FastAPI, LangChain, LlamaIndex, RAG, vector databases, cloud deployment, and AI/ML workflow design.';
+        }
+
+        if (text.includes('education') || text.includes('college') || text.includes('degree')) {
+            return 'Raviteja completed his Bachelor of Computer Applications at REVA University with a CGPA of 8.22.';
+        }
+
+        if (text.includes('resume')) {
+            return 'You can download his latest resume from the Resume button on this page.';
+        }
+
+        return 'Thanks for your interest in Raviteja. He is an Associate Software Engineer - AI/ML focused on LLMs, Generative AI, data platforms, and production-ready AI systems.';
+    }
     
     displayMessage(message) {
         const messageDiv = document.createElement('div');

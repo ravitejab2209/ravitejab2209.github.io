@@ -1,6 +1,6 @@
 # 🚀 AI-Powered Portfolio - Raviteja B
 
-A modern, modular portfolio website with integrated AI chatbot functionality, built using Flask and featuring clean architecture principles.
+A modern, modular portfolio website with integrated AI chatbot functionality. It now includes a GitHub Pages-friendly static homepage so the portfolio can be hosted for free on a username.github.io domain.
 
 ## ✨ Features
 
@@ -45,6 +45,15 @@ PORTFOLIO/
 ```
 
 ## 🚀 Quick Start
+
+### GitHub Pages deployment
+
+1. Push this repository to GitHub.
+2. Ensure the default branch is named `main`.
+3. Open Settings → Pages in GitHub and select the `GitHub Actions` deployment source.
+4. The site will be published at `https://your-username.github.io`.
+
+The repository includes a static entry point at [index.html](index.html) and a Pages workflow in [.github/workflows/deploy-pages.yml](.github/workflows/deploy-pages.yml).
 
 ### Prerequisites
 
